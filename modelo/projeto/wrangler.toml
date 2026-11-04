@@ -1,0 +1,15 @@
+# Configuração do projeto na Cloudflare Pages.
+# Troque `name` pelo nome do projeto criado com `wrangler pages project create`.
+name = "lps-suamarca"
+pages_build_output_dir = "."
+compatibility_date = "2026-01-01"
+
+# Banco D1 dos leads (caminho 3). Crie com `npx wrangler d1 create lps-leads`,
+# cole o database_id devolvido e descomente as 4 linhas.
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "lps-leads"
+# database_id = "COLE-AQUI-O-ID"
+
+# Segredos NÃO entram aqui. Use:
+#   npx wrangler pages secret put LEAD_WEBHOOK_URL --project-name=lps-suamarca

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Troque tudo que está entre [colchetes]. Texto só da fonte (briefing, site, PDF). -->
+  <title>[Nome do produto] · [Marca]</title>
+  <meta name="description" content="[Uma frase com a promessa, pra quem é e o formato.]">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[Nome do produto] · [Marca]">
+  <meta property="og:description" content="[Mesma frase da description.]">
+  <meta property="og:image" content="img/og.jpg"><!-- 1200x630, aparece no WhatsApp -->
+  <link rel="icon" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* Identidade da marca: troque só estas variáveis. */
+    :root {
+      --fundo: #ffffff;
+      --fundo-alt: #f4f5f7;
+      --texto: #1c1f26;
+      --texto-suave: #5b6170;
+      --destaque: #0a57d0;        /* cor do botão */
+      --destaque-escuro: #083f99;
+      --borda: #e2e5ea;
+      --raio: 10px;
+      --fonte: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --largura: 1080px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--fundo); color: var(--texto); font: 400 17px/1.6 var(--fonte); }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--destaque); }
+    h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
+    h1 { font-size: clamp(30px, 7vw, 52px); font-weight: 800; letter-spacing: -.02em; }
+    h2 { font-size: clamp(24px, 5vw, 34px); font-weight: 800; letter-spacing: -.01em; }
+    h3 { font-size: 19px; font-weight: 600; }
+    p { margin: 0 0 1em; }
+    .wrap { max-width: var(--largura); margin: 0 auto; padding: 0 20px; }
+    section { padding: 56px 0; }
+    .alt { background: var(--fundo-alt); }
+    .rotulo { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--destaque); margin-bottom: 12px; }
+    .suave { color: var(--texto-suave); }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 14px 28px;
+      background: var(--destaque); color: #fff; font: 600 17px/1.2 var(--fonte); text-decoration: none; border: 0;
+      border-radius: var(--raio); cursor: pointer; transition: background .15s; }
+    .btn:hover { background: var(--destaque-escuro); }
+    .btn:disabled { opacity: .6; cursor: wait; }
+    @media (max-width: 599px) { .btn { width: 100%; } }
+
+    /* Topo */
+    .topo { padding: 20px 0 56px; }
+    .topo__marca { display: flex; align-items: center; height: 40px; margin-bottom: 32px; font-weight: 800; }
+    .topo__marca img { height: 32px; width: auto; }
+    .topo__grade { display: grid; gap: 32px; align-items: center; }
+    .topo__fatos { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 20px 0 28px; padding: 0; list-style: none; font-weight: 600; }
+    .topo__foto { border-radius: var(--raio); overflow: hidden; background: var(--fundo-alt); aspect-ratio: 4 / 5; }
+    .topo__foto img { width: 100%; height: 100%; object-fit: cover; }
+    @media (min-width: 860px) { .topo__grade { grid-template-columns: 1.2fr 1fr; } }
+
+    /* Cartões de benefício */
+    .grade { display: grid; gap: 16px; margin-top: 28px; }
+    @media (min-width: 700px) { .grade { grid-template-columns: repeat(3, 1fr); } }
+    .cartao { background: var(--fundo); border: 1px solid var(--borda); border-radius: var(--raio); padding: 22px; }
+    .cartao p { margin: 0; color: var(--texto-suave); }
+
+    /* Listas pra quem é */
+    .duas { display: grid; gap: 24px; margin-top: 24px; }
+    @media (min-width: 700px) { .duas { grid-template-columns: 1fr 1fr; } }
+    .lista { margin: 0; padding: 0; list-style: none; }
+    .lista li { padding: 10px 0 10px 30px; border-bottom: 1px solid var(--borda); position: relative; }
+    .lista li::before { content: '✓'; position: absolute; left: 4px; color: var(--destaque); font-weight: 800; }
+    .lista--nao li::before { content: '×'; color: var(--texto-suave); }
+
+    /* Quem ensina */
+    .pessoa { display: grid; gap: 24px; align-items: center; margin-top: 24px; }
+    .pessoa img { border-radius: var(--raio); aspect-ratio: 1; object-fit: cover; background: var(--fundo-alt); }
+    @media (min-width: 700px) { .pessoa { grid-template-columns: 280px 1fr; } }
+
+    /* Programa e FAQ: resumo à vista, detalhe no clique */
+    details { border: 1px solid var(--borda); border-radius: var(--raio); background: var(--fundo); margin-top: 12px; }
+    summary { padding: 16px 48px 16px 20px; font-weight: 600; cursor: pointer; list-style: none; position: relative; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 22px; color: var(--destaque); }
+    details[open] summary::after { content: '−'; }
+    details > div { padding: 0 20px 18px; color: var(--texto-suave); }
+
+    /* Oferta e formulário */
+    .oferta { display: grid; gap: 32px; align-items: start; }
+    @media (min-width: 860px) { .oferta { grid-template-columns: 1fr 1fr; } }
+    .preco { font-size: clamp(34px, 8vw, 48px); font-weight: 800; line-height: 1.1; margin: 8px 0 4px; }
+    .form { background: var(--fundo); border: 1px solid var(--borda); border-radius: var(--raio); padding: 24px; }
+    .form label { display: block; font-size: 15px; font-weight: 600; margin: 14px 0 6px; }
+    .form input { width: 100%; min-height: 50px; padding: 12px 14px; font: 400 17px var(--fonte); color: var(--texto);
+      border: 1px solid var(--borda); border-radius: 8px; background: #fff; }
+    .form input:focus { outline: 2px solid var(--destaque); outline-offset: 1px; border-color: transparent; }
+    .form .btn { width: 100%; margin-top: 20px; }
+    .form__isca { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .form__aviso { font-size: 13px; color: var(--texto-suave); margin: 12px 0 0; }
+    .form__erro { display: none; margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: #fdecec; color: #8a1c1c; font-size: 15px; }
+
+    .rodape { padding: 32px 0; font-size: 14px; color: var(--texto-suave); border-top: 1px solid var(--borda); }
+  </style>
+</head>
+<body>
+
+  <!-- 1. TOPO: promessa, pra quem é, fatos e botão -->
+  <header class="topo">
+    <div class="wrap">
+      <div class="topo__marca">[Marca]<!-- ou <img src="img/logo.png" alt="[Marca]" width="160" height="32"> --></div>
+      <div class="topo__grade">
+        <div>
+          <span class="rotulo">[Tipo: curso, imersão, master class]</span>
+          <h1>[Promessa principal em uma frase]</h1>
+          <p class="suave">[Pra quem é e o que muda na prática, em duas linhas no máximo.]</p>
+          <ul class="topo__fatos">
+            <li>[Data]</li>
+            <li>[Formato: online, presencial]</li>
+            <li>[Carga horária ou duração]</li>
+          </ul>
+          <a class="btn" href="#inscricao">[Quero me inscrever]</a>
+        </div>
+        <div class="topo__foto">
+          <img src="img/topo.jpg" alt="[Descrição da foto]" width="800" height="1000" fetchpriority="high">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. O QUE A PESSOA LEVA -->
+  <section class="alt">
+    <div class="wrap">
+      <span class="rotulo">O que você leva</span>
+      <h2>[Título do bloco de benefícios]</h2>
+      <div class="grade">
+        <div class="cartao"><h3>[Benefício 1]</h3><p>[Uma frase concreta.]</p></div>
+        <div class="cartao"><h3>[Benefício 2]</h3><p>[Uma frase concreta.]</p></div>
+        <div class="cartao"><h3>[Benefício 3]</h3><p>[Uma frase concreta.]</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PRA QUEM É -->
+  <section>
+    <div class="wrap">
+      <span class="rotulo">Pra quem é</span>
+      <h2>[Título do bloco]</h2>
+      <div class="duas">
+        <ul class="lista">
+          <li>[Perfil 1]</li>
+          <li>[Perfil 2]</li>
+          <li>[Perfil 3]</li>
+        </ul>
+        <ul class="lista lista--nao">
+          <li>[Pra quem não é 1]</li>
+          <li>[Pra quem não é 2]</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. QUEM ENSINA (ou prova: depoimento, número verificável) -->
+  <section class="alt">
+    <div class="wrap">
+      <span class="rotulo">Quem conduz</span>
+      <div class="pessoa">
+        <img src="img/pessoa.jpg" alt="[Nome]" width="560" height="560" loading="lazy">
+        <div>
+          <h2>[Nome]</h2>
+          <p>[Mini bio: credenciais e experiência, só o que a fonte confirma.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. PROGRAMA: resumo à vista, detalhe no clique -->
+  <section>
+    <div class="wrap">
+      <span class="rotulo">Programa</span>
+      <h2>[Título do programa]</h2>
+      <details><summary>[Módulo ou encontro 1]</summary><div><p>[Tópicos do módulo.]</p></div></details>
+      <details><summary>[Módulo ou encontro 2]</summary><div><p>[Tópicos do módulo.]</p></div></details>
+      <details><summary>[Módulo ou encontro 3]</summary><div><p>[Tópicos do módulo.]</p></div></details>
+    </div>
+  </section>
+
+  <!-- 6. OFERTA + FORMULÁRIO
+       LP sem formulário: troque o <form> por <a class="btn" href="[link do checkout ou wa.me]">. -->
+  <section class="alt" id="inscricao">
+    <div class="wrap oferta">
+      <div>
+        <span class="rotulo">Inscrição</span>
+        <h2>[Chamada da oferta]</h2>
+        <p class="preco">[R$ 000]</p>
+        <p class="suave">[Condição: parcelamento, o que inclui, prazo. Só o que a fonte confirma.]</p>
+        <ul class="lista">
+          <li>[Item incluso 1]</li>
+          <li>[Item incluso 2]</li>
+        </ul>
+      </div>
+      <form class="form" id="form-lead" novalidate>
+        <h3>[Preencha pra garantir sua vaga]</h3>
+        <label for="f-nome">Nome</label>
+        <input id="f-nome" name="nome" type="text" autocomplete="name" required>
+        <label for="f-email">E-mail</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+        <label for="f-telefone">WhatsApp</label>
+        <input id="f-telefone" name="telefone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000">
+        <div class="form__isca" aria-hidden="true">
+          <label for="f-site">Não preencha</label>
+          <input id="f-site" name="site" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <button class="btn" type="submit">[Quero me inscrever]</button>
+        <p class="form__erro" id="form-erro" role="alert"></p>
+        <p class="form__aviso">Usamos seus dados só pra falar sobre esta inscrição. <a href="[link da política de privacidade]">Política de privacidade</a>.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 7. PERGUNTAS FREQUENTES -->
+  <section>
+    <div class="wrap">
+      <span class="rotulo">Dúvidas</span>
+      <h2>Perguntas frequentes</h2>
+      <details><summary>[Pergunta 1]</summary><div><p>[Resposta.]</p></div></details>
+      <details><summary>[Pergunta 2]</summary><div><p>[Resposta.]</p></div></details>
+      <details><summary>[Pergunta 3]</summary><div><p>[Resposta.]</p></div></details>
+      <p style="margin-top:32px"><a class="btn" href="#inscricao">[Quero me inscrever]</a></p>
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <div class="wrap">[Marca] · [CNPJ ou contato] · <a href="[link da política de privacidade]">Política de privacidade</a></div>
+  </footer>
+
+  <script>
+  (function () {
+    var SLUG = location.pathname.split('/').filter(Boolean)[0] || '';
+    var form = document.getElementById('form-lead');
+    if (!form) return;
+    var erro = document.getElementById('form-erro');
+    var botao = form.querySelector('button[type="submit"]');
+
+    // Trava de prévia: <branch>.<projeto>.pages.dev não envia (aprovação sem lead falso).
+    // Produção (<projeto>.pages.dev, domínio próprio) e localhost enviam normal.
+    var h = location.hostname;
+    var previa = /\.pages\.dev$/.test(h) && h.split('.').length > 3;
+
+    function mostrarErro(msg) { erro.textContent = msg; erro.style.display = 'block'; }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      erro.style.display = 'none';
+      var dados = {
+        nome: form.nome.value.trim(),
+        email: form.email.value.trim(),
+        telefone: form.telefone.value.trim(),
+        site: form.site.value,
+        lp: SLUG,
+        pagina: location.href.split('#')[0]
+      };
+      if (!dados.nome) return mostrarErro('Preencha seu nome.');
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(dados.email)) return mostrarErro('Confira seu e-mail.');
+      if (previa) return mostrarErro('Prévia: o formulário não envia neste endereço.');
+
+      botao.disabled = true;
+      fetch('/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { r: r, j: j }; }); })
+        .then(function (res) {
+          if (!res.r.ok || !res.j.ok) throw new Error(res.j.error || 'falha');
+          var q = new URLSearchParams({ nome: dados.nome.split(/\s+/)[0], lp: SLUG });
+          location.href = '/obrigado/?' + q.toString();
+        })
+        .catch(function () {
+          botao.disabled = false;
+          mostrarErro('Não conseguimos enviar agora. Tente de novo em instantes.');
+        });
+    });
+  })();
+  </script>
+</body>
+</html>

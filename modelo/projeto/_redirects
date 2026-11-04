@@ -1,0 +1,20 @@
+# O deploy publica a pasta inteira. Estas linhas escondem os arquivos de trabalho.
+# Arquivo novo na raiz que não pode ser público: adicione a linha aqui ANTES do deploy.
+/CLAUDE.md          /  301
+/HANDOFF.md         /  301
+/README.md          /  301
+/wrangler.toml      /  301
+/schema.sql         /  301
+/package.json       /  301
+/package-lock.json  /  301
+/.claude/*          /  301
+/.git/*             /  301
+/.wrangler/*        /  301
+/node_modules/*     /  301
+
+# Raiz do domínio: mande pro site principal (ou crie um index.html com a vitrine).
+# /  https://suamarca.com.br/  302
+
+# LPs aposentadas: anúncio e link antigos continuam funcionando.
+# /slug-velho     /slug-novo/  301
+# /slug-velho/*   /slug-novo/  301
